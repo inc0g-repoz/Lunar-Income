@@ -143,7 +143,7 @@ class Frame extends JFrame {
         }
 
         double timeMins = time * 60;
-        for (double i = 0; i <= timeMins; i += delay) {
+        for (double i = 0; i < timeMins; i += delay) {
             double portion = (balance / 100) * interest;
             balance += portion;
         }
