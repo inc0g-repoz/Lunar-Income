@@ -21,6 +21,7 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -54,10 +55,11 @@ class Frame extends JFrame {
 
     private JLabel jlResult = new JLabel("$0.0");
     private JButton jbResult = new JButton("Calculate");
+    private JCheckBox jcbOnline = new JCheckBox("Online", true);
 
     {
         setTitle("LunarIncome");
-        setSize(300, 325);
+        setSize(300, 370);
         setLocation(500, 300);
         setResizable(false);
 
@@ -69,6 +71,7 @@ class Frame extends JFrame {
                     BufferedImage myPicture = ImageIO.read(getClass().getClassLoader()
                             .getResource("assets/ad.png"));
                     jlHeaderImage = new JLabel(new ImageIcon(myPicture));
+                    jlHeaderImage.setToolTipText("Click here to copy the command!");
                     add(jlHeaderImage);
                 } catch (IOException ioe) {
                 }
@@ -100,6 +103,7 @@ class Frame extends JFrame {
                     }
                 };
 
+                add(jcbOnline);
                 borderedPanel.setBorder(BorderFactory.createEtchedBorder());
                 add(borderedPanel);
 
@@ -140,6 +144,10 @@ class Frame extends JFrame {
             jlResult.setText("Invalid input!");
             jlResult.setForeground(Color.red);
             return;
+        }
+
+        if (!jcbOnline.isSelected()) {
+            delay *= 2;
         }
 
         double timeMins = time * 60;
