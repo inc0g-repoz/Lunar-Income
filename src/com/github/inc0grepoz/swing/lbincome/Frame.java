@@ -41,7 +41,7 @@ public class Frame extends JFrame {
     private JLabel jlDelay = new JLabel("Delay (mins):");
     private JLabel jlTime = new JLabel("Time (hours):");
 
-    private JLabel jlResult = new JLabel("$0.0");
+    private JLabel jlResult = new JLabel("$0.00");
     private JButton jbResult = new JButton("Calculate");
     private JCheckBox jcbOnline = new JCheckBox("Online", true);
 
@@ -111,7 +111,7 @@ public class Frame extends JFrame {
         if (jlHeaderImage != null) {
             jlHeaderImage.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
-                    copyText("/is warp Egzotik");
+                    copyText("lunarblock.minehut.gg");
                     jlResult.setText("Copied!");
                 }
             });
@@ -171,7 +171,11 @@ public class Frame extends JFrame {
 
     public String format(double time) {
         DecimalFormat df = new DecimalFormat("#,###.00");
-        return df.format(time);
+        String string = df.format(time);
+        if (string.startsWith(".")) {
+            string = "0" + string;
+        }
+        return string;
     }
 
 }
