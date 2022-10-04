@@ -15,13 +15,7 @@ import static javax.sound.sampled.AudioSystem.getAudioInputStream;
 import static javax.sound.sampled.AudioFormat.Encoding.PCM_SIGNED;
 
 public class AudioFilePlayer {
- 
-    public static void main(String[] args) {
-        final AudioFilePlayer player = new AudioFilePlayer ();
-        player.play("something.mp3");
-        player.play("something.ogg");
-    }
- 
+
     public void play(String filePath) {
         final File file = new File(filePath);
  
@@ -48,14 +42,14 @@ public class AudioFilePlayer {
             throw new IllegalStateException(e);
         }
     }
- 
+
     private AudioFormat getOutFormat(AudioFormat inFormat) {
         final int ch = inFormat.getChannels();
 
         final float rate = inFormat.getSampleRate();
         return new AudioFormat(PCM_SIGNED, rate, 16, ch, ch * 2, rate, false);
     }
- 
+
     private void stream(AudioInputStream in, SourceDataLine line) 
         throws IOException {
         final byte[] buffer = new byte[4096];
@@ -63,4 +57,5 @@ public class AudioFilePlayer {
             line.write(buffer, 0, n);
         }
     }
+
 }
